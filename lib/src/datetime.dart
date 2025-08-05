@@ -54,6 +54,7 @@ dynamic reduceOperateDateTime(
   return result;
 }
 
+@pragma('vm:entry-point')
 bool dateTimeGreaterOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateDateTime(
     (a, b) => a.isAfter(b) ? b : null,
@@ -64,6 +65,7 @@ bool dateTimeGreaterOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+@pragma('vm:entry-point')
 bool dateTimeGreaterEqualOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateDateTime(
     (a, b) => a.isAfter(b) || a.isAtSameMomentAs(b) ? b : null,
@@ -74,6 +76,7 @@ bool dateTimeGreaterEqualOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+@pragma('vm:entry-point')
 bool dateTimeLessOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateDateTime(
     (a, b) => a.isBefore(b) ? b : null,
@@ -84,6 +87,7 @@ bool dateTimeLessOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+@pragma('vm:entry-point')
 bool dateTimeLessEqualOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateDateTime(
     (a, b) => a.isBefore(b) || a.isAtSameMomentAs(b) ? b : null,
@@ -94,6 +98,7 @@ bool dateTimeLessEqualOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+@pragma('vm:entry-point')
 bool isDateTimeEqualOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperateDateTime(
         (a, b) => a.isAtSameMomentAs(b) ? b : null,
@@ -104,16 +109,19 @@ bool isDateTimeEqualOperator(Applier applier, dynamic data, List params) {
   return r != null;
 }
 
+@pragma('vm:entry-point')
 dynamic nowOperator(Applier applier, dynamic data, List params) {
   DateTime now = DateTime.now();
   return DateTime(now.year, now.month, now.day, now.hour, now.minute);
 }
 
+@pragma('vm:entry-point')
 dynamic currentDateOperator(Applier applier, dynamic data, List params) {
   DateTime now = DateTime.now();
   return DateTime(now.year, now.month, now.day);
 }
 
+@pragma('vm:entry-point')
 dynamic dateAddOperator(Applier applier, dynamic data, List params) {
   if (params.length != 3) {
     throw JsonlogicException('date_add requires exactly 3 parameters');

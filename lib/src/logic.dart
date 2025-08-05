@@ -5,6 +5,7 @@ import 'numeric.dart';
 import 'truth.dart';
 import 'string.dart';
 
+@pragma('vm:entry-point')
 dynamic ifOperator(Applier applier, dynamic data, List params) {
   while (true) {
     if (params.isEmpty) return null;
@@ -77,14 +78,17 @@ bool listEquals<T>(List<T>? a, List<T>? b) {
   return true;
 }
 
+@pragma('vm:entry-point')
 dynamic equalOperator(Applier applier, dynamic data, List params) {
   return isEqual(applier, data, params);
 }
 
+@pragma('vm:entry-point')
 dynamic notEqualOperator(Applier applier, dynamic data, List params) {
   return !isEqual(applier, data, params);
 }
 
+@pragma('vm:entry-point')
 dynamic strictEqualOperator(Applier applier, dynamic data, List params) {
   if (params.isEmpty) {
     return false;
@@ -97,6 +101,7 @@ dynamic strictEqualOperator(Applier applier, dynamic data, List params) {
   return v1 == v2;
 }
 
+@pragma('vm:entry-point')
 dynamic strictNEOperator(Applier applier, dynamic data, List params) {
   if (params.isEmpty) {
     return false;
@@ -109,6 +114,7 @@ dynamic strictNEOperator(Applier applier, dynamic data, List params) {
   return v1 != v2;
 }
 
+@pragma('vm:entry-point')
 dynamic notOperator(Applier applier, dynamic data, List params) {
   if (params.isEmpty) {
     return false;
@@ -117,6 +123,7 @@ dynamic notOperator(Applier applier, dynamic data, List params) {
   return !truth(v);
 }
 
+@pragma('vm:entry-point')
 dynamic notNotOperator(Applier applier, dynamic data, List params) {
   if (params.isEmpty) {
     return false;
@@ -125,6 +132,7 @@ dynamic notNotOperator(Applier applier, dynamic data, List params) {
   return truth(v);
 }
 
+@pragma('vm:entry-point')
 dynamic orOperator(Applier applier, dynamic data, List params) {
   dynamic v;
   for (var p in params) {
@@ -134,6 +142,7 @@ dynamic orOperator(Applier applier, dynamic data, List params) {
   return v;
 }
 
+@pragma('vm:entry-point')
 dynamic andOperator(Applier applier, dynamic data, List params) {
   dynamic v;
   for (var p in params) {
@@ -143,6 +152,7 @@ dynamic andOperator(Applier applier, dynamic data, List params) {
   return v;
 }
 
+@pragma('vm:entry-point')
 dynamic andBoolOperator(Applier applier, dynamic data, List params) {
   dynamic v;
   for (var p in params) {
@@ -166,21 +176,25 @@ dynamic determineAndApplyComparison(Applier applier, dynamic data, List params,
   return numberOperator(applier, data, params);
 }
 
+@pragma('vm:entry-point')
 dynamic lessOperator(Applier applier, dynamic data, List params) {
   return determineAndApplyComparison(
       applier, data, params, dateTimeLessOperator, numLessOperator);
 }
 
+@pragma('vm:entry-point')
 dynamic lessEqualOperator(Applier applier, dynamic data, List params) {
   return determineAndApplyComparison(
       applier, data, params, dateTimeLessEqualOperator, numLessEqualOperator);
 }
 
+@pragma('vm:entry-point')
 dynamic greaterOperator(Applier applier, dynamic data, List params) {
   return determineAndApplyComparison(
       applier, data, params, dateTimeGreaterOperator, numGreaterOperator);
 }
 
+@pragma('vm:entry-point')
 dynamic greaterEqualOperator(Applier applier, dynamic data, List params) {
   return determineAndApplyComparison(applier, data, params,
       dateTimeGreaterEqualOperator, numGreaterEqualOperator);

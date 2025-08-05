@@ -44,6 +44,7 @@ List findVar(dynamic key, dynamic data) {
   return [d, notFound];
 }
 
+@pragma('vm:entry-point')
 dynamic varOperator(Applier applier, dynamic data, List params) {
   if (params.isEmpty) return data;
 
@@ -61,12 +62,14 @@ dynamic varOperator(Applier applier, dynamic data, List params) {
   return d;
 }
 
+@pragma('vm:entry-point')
 dynamic varStrictEqualOperator(Applier applier, dynamic data, List params) {
   if (params.length < 2) return null;
   var result = varOperator(applier, data, params);
   return strictEqualOperator(applier, data, [result, params[1]]);
 }
 
+@pragma('vm:entry-point')
 dynamic missingOperator(Applier applier, dynamic data, List params) {
   if (params.length == 1) {
     var v = applier(params[0], data);
@@ -92,6 +95,7 @@ dynamic missingOperator(Applier applier, dynamic data, List params) {
   return missing;
 }
 
+@pragma('vm:entry-point')
 dynamic missingSomeOperator(Applier applier, dynamic data, List params) {
   if (params.length != 2) {
     return [];

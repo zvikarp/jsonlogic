@@ -13,6 +13,11 @@ num? getNumber(dynamic arg) {
   return null;
 }
 
+bool isNumber(String str) {
+  num? number = num.tryParse(str);
+  return number != null;
+}
+
 dynamic binaryOperate(dynamic Function(num n1, num n2) op, Applier applier,
     dynamic data, List params) {
   if (params.length <= 1) {
@@ -47,14 +52,17 @@ dynamic reduceOperate(num Function(num n1, num n2) op, Applier applier,
   return r;
 }
 
+@pragma('vm:entry-point')
 dynamic addOperator(Applier applier, dynamic data, List params) {
   return reduceOperate((a, b) => a + b, applier, data, params, 0.0);
 }
 
+@pragma('vm:entry-point')
 dynamic mulOperator(Applier applier, dynamic data, List params) {
   return reduceOperate((a, b) => a * b, applier, data, params, 1.0);
 }
 
+@pragma('vm:entry-point')
 dynamic subOperator(Applier applier, dynamic data, List params) {
   if (params.length == 1) {
     var v = applier(params[0], data);
@@ -67,47 +75,55 @@ dynamic subOperator(Applier applier, dynamic data, List params) {
   return binaryOperate((a, b) => a - b, applier, data, params);
 }
 
+@pragma('vm:entry-point')
 dynamic divOperator(Applier applier, dynamic data, List params) {
   return binaryOperate((a, b) => a / b, applier, data, params);
 }
 
+@pragma('vm:entry-point')
 dynamic modOperator(Applier applier, dynamic data, List params) {
   return binaryOperate((a, b) => a % b, applier, data, params);
 }
 
-dynamic greaterOperator(Applier applier, dynamic data, List params) {
+@pragma('vm:entry-point')
+dynamic numGreaterOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperate(
       (a, b) => a > b ? b : double.nan, applier, data, params, double.infinity);
   if (r == null) return false;
   return !r.isNaN;
 }
 
-dynamic greaterEqualOperator(Applier applier, dynamic data, List params) {
+@pragma('vm:entry-point')
+dynamic numGreaterEqualOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperate((a, b) => a >= b ? b : double.nan, applier, data,
       params, double.infinity);
   if (r == null) return false;
   return !r.isNaN;
 }
 
-dynamic lessOperator(Applier applier, dynamic data, List params) {
+@pragma('vm:entry-point')
+dynamic numLessOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperate((a, b) => a < b ? b : double.nan, applier, data, params,
       -double.infinity);
   if (r == null) return false;
   return !r.isNaN;
 }
 
-dynamic lessEqualOperator(Applier applier, dynamic data, List params) {
+@pragma('vm:entry-point')
+dynamic numLessEqualOperator(Applier applier, dynamic data, List params) {
   var r = reduceOperate((a, b) => a <= b ? b : double.nan, applier, data,
       params, -double.infinity);
   if (r == null) return false;
   return !r.isNaN;
 }
 
+@pragma('vm:entry-point')
 dynamic maxOperator(Applier applier, dynamic data, List params) {
   return reduceOperate(
       (a, b) => a > b ? a : b, applier, data, params, -double.infinity);
 }
 
+@pragma('vm:entry-point')
 dynamic minOperator(Applier applier, dynamic data, List params) {
   return reduceOperate(
       (a, b) => a < b ? a : b, applier, data, params, double.infinity);

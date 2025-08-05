@@ -1,6 +1,7 @@
 import 'interface.dart';
 import 'dart:convert';
 
+@pragma('vm:entry-point')
 String toString(dynamic v) {
   if (v == null) {
     return '';
@@ -12,6 +13,7 @@ String toString(dynamic v) {
   return '$v';
 }
 
+@pragma('vm:entry-point')
 dynamic catOperator(Applier applier, dynamic data, List params) {
   var l = params.map((p) {
     var v = applier(p, data);
@@ -20,6 +22,7 @@ dynamic catOperator(Applier applier, dynamic data, List params) {
   return l.join();
 }
 
+@pragma('vm:entry-point')
 dynamic substrOperator(Applier applier, dynamic data, List params) {
   if (params.isEmpty) {
     return '';
@@ -67,6 +70,7 @@ dynamic substrOperator(Applier applier, dynamic data, List params) {
   }
 }
 
+@pragma('vm:entry-point')
 dynamic logOperator(Applier applier, dynamic data, List params) {
   var v = applier(params[0], data);
   print('$v');

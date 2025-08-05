@@ -36,15 +36,18 @@ dynamic arrayApply(dynamic Function(List args, List applied) f,
   return defaultValue;
 }
 
+@pragma('vm:entry-point')
 dynamic boolArrayApply(
     bool Function(List array) f, Applier applier, dynamic data, List params) {
   return arrayApply((args, applied) => f(applied), null, applier, data, params);
 }
 
+@pragma('vm:entry-point')
 dynamic mapOperator(Applier applier, dynamic data, List params) {
   return arrayApply((_, applied) => applied, [], applier, data, params);
 }
 
+@pragma('vm:entry-point')
 dynamic filterOperator(Applier applier, dynamic data, List params) {
   List filter(List args, List applied) {
     var output = [];
@@ -68,6 +71,7 @@ dynamic reduce(
   return r;
 }
 
+@pragma('vm:entry-point')
 dynamic reduceOperator(Applier applier, dynamic data, List params) {
   if (params.length != 3) {
     return null;
@@ -81,6 +85,7 @@ dynamic reduceOperator(Applier applier, dynamic data, List params) {
   return initialValue;
 }
 
+@pragma('vm:entry-point')
 dynamic allOperator(Applier applier, dynamic data, List params) {
   bool all(List array) {
     if (array.isEmpty) return false;
@@ -93,6 +98,7 @@ dynamic allOperator(Applier applier, dynamic data, List params) {
   return boolArrayApply(all, applier, data, params);
 }
 
+@pragma('vm:entry-point')
 dynamic someOperator(Applier applier, dynamic data, List params) {
   bool some(List array) {
     if (array.isEmpty) return false;
@@ -105,6 +111,7 @@ dynamic someOperator(Applier applier, dynamic data, List params) {
   return boolArrayApply(some, applier, data, params);
 }
 
+@pragma('vm:entry-point')
 dynamic noneOperator(Applier applier, dynamic data, List params) {
   bool none(List array) {
     for (var a in array) {
@@ -116,6 +123,7 @@ dynamic noneOperator(Applier applier, dynamic data, List params) {
   return boolArrayApply(none, applier, data, params);
 }
 
+@pragma('vm:entry-point')
 dynamic mergeOperator(Applier applier, dynamic data, List params) {
   var output = [];
   for (var p in params) {
@@ -125,6 +133,7 @@ dynamic mergeOperator(Applier applier, dynamic data, List params) {
   return output;
 }
 
+@pragma('vm:entry-point')
 dynamic inOperator(Applier applier, dynamic data, List params) {
   if (params.length != 2) {
     return false;

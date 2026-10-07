@@ -36,6 +36,7 @@ dynamic arrayApply(dynamic Function(List args, List applied) f,
   return defaultValue;
 }
 
+@pragma('vm:entry-point')
 dynamic boolArrayApply(
     bool Function(List array) f, Applier applier, dynamic data, List params) {
   return arrayApply((args, applied) => f(applied), null, applier, data, params);

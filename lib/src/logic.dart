@@ -22,6 +22,7 @@ dynamic ifOperator(Applier applier, dynamic data, List params) {
   }
 }
 
+@pragma('vm:entry-point')
 bool isEqual(Applier applier, dynamic data, List params) {
   if (params.isEmpty) {
     return false;
@@ -162,8 +163,13 @@ dynamic andBoolOperator(Applier applier, dynamic data, List params) {
   return true;
 }
 
-dynamic determineAndApplyComparison(Applier applier, dynamic data, List params,
-    Function dateTimeOperator, Function numberOperator) {
+dynamic determineAndApplyComparison(
+  Applier applier,
+  dynamic data,
+  List params,
+  Function dateTimeOperator,
+  Function numberOperator,
+) {
   if (params.isEmpty) {
     return false;
   }
@@ -179,23 +185,43 @@ dynamic determineAndApplyComparison(Applier applier, dynamic data, List params,
 @pragma('vm:entry-point')
 dynamic lessOperator(Applier applier, dynamic data, List params) {
   return determineAndApplyComparison(
-      applier, data, params, dateTimeLessOperator, numLessOperator);
+    applier,
+    data,
+    params,
+    dateTimeLessOperator,
+    numLessOperator,
+  );
 }
 
 @pragma('vm:entry-point')
 dynamic lessEqualOperator(Applier applier, dynamic data, List params) {
   return determineAndApplyComparison(
-      applier, data, params, dateTimeLessEqualOperator, numLessEqualOperator);
+    applier,
+    data,
+    params,
+    dateTimeLessEqualOperator,
+    numLessEqualOperator,
+  );
 }
 
 @pragma('vm:entry-point')
 dynamic greaterOperator(Applier applier, dynamic data, List params) {
   return determineAndApplyComparison(
-      applier, data, params, dateTimeGreaterOperator, numGreaterOperator);
+    applier,
+    data,
+    params,
+    dateTimeGreaterOperator,
+    numGreaterOperator,
+  );
 }
 
 @pragma('vm:entry-point')
 dynamic greaterEqualOperator(Applier applier, dynamic data, List params) {
-  return determineAndApplyComparison(applier, data, params,
-      dateTimeGreaterEqualOperator, numGreaterEqualOperator);
+  return determineAndApplyComparison(
+    applier,
+    data,
+    params,
+    dateTimeGreaterEqualOperator,
+    numGreaterEqualOperator,
+  );
 }

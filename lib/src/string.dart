@@ -1,6 +1,7 @@
 import 'interface.dart';
 import 'dart:convert';
 
+@pragma('vm:entry-point')
 String toString(dynamic v) {
   if (v == null) {
     return '';
